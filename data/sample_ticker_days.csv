@@ -1,0 +1,6 @@
+ticker,date,comment_text,n_mentions,subreddit_mix,prev_day_volume,volume_20d_avg,volume_spike
+GME,2026-09-22,"loading calls for earnings this is going to rip",14,0.93,4820000,3910000,0
+GME,2026-09-23,"squeeze is back GME to the moon",47,0.96,12400000,4180000,1
+AAPL,2026-09-22,"solid quarter nothing exciting",6,0.33,41200000,44800000,0
+AAPL,2026-09-23,"",0,0.00,39800000,44100000,0
+PLTR,2026-09-23,"this run is insane still holding",22,0.77,31500000,28900000,0

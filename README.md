@@ -40,7 +40,7 @@ Planned features:
 - TF-IDF unigrams and bigrams from Reddit comments
 - Average VADER sentiment and the share of negative comments
 - Mention velocity compared with the ticker's trailing 20-day average
-- Uppercase-character ratio and exclamation-mark density — VADER already accounts for both, but its final score hides their actual magnitude, so the raw ratios are kept as separate features
+- Uppercase-character ratio and exclamation-mark density. VADER already accounts for both, but its final score hides their actual magnitude, so the raw ratios are kept as separate features
 - Controls: previous-day volume divided by its 20-day average, subreddit mix, an `earnings_tomorrow` flag, and day of the week
 
 Working hypothesis: mention velocity will be more useful than sentiment, because attention matters more than mood.
@@ -51,7 +51,7 @@ Logistic regression is the primary model — it works well on a smaller dataset 
 
 The main pipeline is classical NLP: regex for ticker matching, TF-IDF and VADER for text features, and logistic regression for prediction. The target comes directly from `yfinance` volume data, so no manual outcome labeling is required.
 
-VADER is a general-purpose lexicon, and its 7,506 entries do not include common trading vocabulary — `bullish`, `bearish`, `bagholding`, `tendies`, `moon`, `puts`, `calls`, and `squeeze` are all absent. To cover that gap, the Claude API will label roughly 500 comments for trading-specific sentiment, and a lighter classifier will be trained on those labels rather than calling the API per comment at inference time.
+VADER is a general-purpose lexicon, and its 7,506 entries do not include common trading vocabulary : `bullish`, `bearish`, `bagholding`, `tendies`, `moon`, `puts`, `calls`, and `squeeze` are all absent. To cover that gap, the Claude API will label roughly 500 comments for trading-specific sentiment, and a lighter classifier will be trained on those labels rather than calling the API per comment at inference time.
 
 The two sentiment measures are kept as separate features: VADER for general emotion, the trained classifier for trading sentiment. Estimated labeling cost using Claude Haiku is about $0.10, assuming roughly 50,000 input tokens and 10,000 output tokens.
 

@@ -3,7 +3,8 @@
 Predicts which watched stock tickers are likely to experience abnormal next-day trading volume, so a retail brokerage can prepare before markets open.
 
 **Authors:** Luc Grenier, Alex Toth
-**Course:** INFO 4360 — Complex Data Analytics, University of Denver
+**Course:** INFO 4360
+Complex Data Analytics, University of Denver
 
 ## Problem
 
@@ -62,7 +63,7 @@ Earnings are included as a control so that earnings-driven volume is not incorre
 
 ## Status
 
-**Phase 1 — complete.** Proposal submitted, mock schema added, data collection in progress.
+**Phase 1 : complete.** Proposal submitted, mock schema added, data collection in progress.
 
 ## Setup
 

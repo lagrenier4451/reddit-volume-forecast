@@ -5,3 +5,7 @@ __pycache__/
 data/raw/
 .ipynb_checkpoints/
 .venv/
+
+# Processed data and Reddit credentials
+data/processed/
+praw.ini

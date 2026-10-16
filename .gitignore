@@ -9,3 +9,8 @@ data/raw/
 # Processed data and Reddit credentials
 data/processed/
 praw.ini
+
+# Include the downloaded project dataset
+!data/raw/
+data/raw/*
+!data/raw/reddit_wsb.csv

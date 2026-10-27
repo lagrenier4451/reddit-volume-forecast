@@ -1,78 +1,67 @@
 # Reddit Volume Forecast
 
-Predicts which watched stock tickers are likely to experience abnormal next-day trading volume, so a retail brokerage can prepare before markets open.
+Can Reddit discussion help a retail brokerage anticipate which stocks will see unusually high trading volume, before the market opens?
 
 **Authors:** Luc Grenier, Alex Toth
-**Course:** INFO 4360
-Complex Data Analytics, University of Denver
+**Course:** INFO 4360 Complex Data Analytics, University of Denver
+**Status:** Phase 2 (exploration) complete; Phase 3 (modelling) next
 
 ## Problem
 
-A retail brokerage's market intelligence and risk teams need advance notice of stocks likely to experience unusually high trading volume. Today, they may only recognize that a stock has gained attention on Reddit after trading activity and customer support requests begin to rise. This can strain support staff, create unexpected margin exposure, and delay risk decisions.
-
-This project tests whether changes in Reddit ticker mentions and sentiment can help predict volume spikes on the next trading day. The resulting pre-market watchlist would help these teams adjust staffing, prioritize monitoring, and review risk controls before markets open.
+A brokerage's risk and market-intelligence teams often notice Reddit-driven attention only after trading and support requests have already surged. We test whether ticker mentions and sentiment in r/wallstreetbets comments posted before the open can help flag tickers likely to have a volume spike that session, producing a pre-market watchlist.
 
 ## Data
 
 | Item | Description |
 |---|---|
-| Sources | Reddit API through PRAW for text; Yahoo Finance through `yfinance` for trading volume |
-| Collection | Comments from Daily Discussion threads in `r/wallstreetbets` and `r/stocks` across about 90 trading days — an estimated 80,000–120,000 comments before filtering |
-| Unit of analysis | One row per ticker-day |
-| Expected size | About 900 rows: 10 tickers across about 90 trading days, including days with zero mentions |
-| Tickers | AAPL, MSFT, NVDA, TSLA, GME, PLTR, AMD, COIN, HOOD, and SOFI |
-| Text field | `comment_text`: all comments mentioning a ticker on a given day, combined into one field |
-| Key columns | `ticker`, `date`, `comment_text`, `n_mentions`, `subreddit_mix`, `prev_day_volume`, and `volume_20d_avg` |
-| Target | `volume_spike`: whether next-day volume is at least 2 times the ticker's trailing 20-day average |
-| Mention rule | Case-sensitive uppercase ticker match with a word boundary; `$` is optional |
-| Zero-mention days | Retained because the watchlist must score every ticker each day, and no discussion may also be useful information |
+| Text | 1,001,160 r/wallstreetbets comments from August 2021 ([SocialGrep on Hugging Face](https://huggingface.co/datasets/SocialGrep/reddit-wallstreetbets-aug-2021)); 813,935 usable after removing deleted/removed comments. Loaded directly from a pinned URL in the notebook, nothing to download manually. |
+| Volume | Daily trading volume from Yahoo Finance via `yfinance` (July–August 2021) |
+| Unit of analysis | One row per ticker-session: 17 tickers × 22 trading sessions = 374 rows |
+| Target | `spike_1.5`: session volume at least 1.5× the ticker's average over the previous 20 trading days (50 positive cases) |
+| Session rule | Each comment counts toward the next 9:30 a.m. New York market open after it was posted |
+| Ticker matching | Uppercase symbols (e.g. `GME`) or `$`-prefixed symbols in any case (e.g. `$gme`) |
 
-The target is normalized by ticker so that a spike has a similar meaning for stocks with very different normal trading volumes. The uppercase mention rule reduces false matches for tickers such as COIN and HOOD, but it may miss lowercase mentions.
+HOOD is excluded (listed July 29, 2021, so no 20-day baseline). WISH volume is retrieved under its current symbol, LOGC.
 
-A small mock dataset is included in `data/sample_ticker_days.csv` to show the planned schema, including a zero-mention day.
+An earlier exploration of a Kaggle dataset of WSB *posts* (January–April 2021) is kept in `notebooks/01b_volume_target.ipynb` with its data in `data/raw/`. We moved to comments because posts were too thin (median 18 words, more than half title-only) and dominated by GME.
 
-## Approach
+## Repository structure
 
-This is a **Path A classification project**. The initial target is next-day volume at least 2 times the trailing 20-day average. The threshold will be lowered to 1.5 times if the 2-times definition creates too few positive cases.
-
-Planned features:
-
-- TF-IDF unigrams and bigrams from Reddit comments
-- Average VADER sentiment and the share of negative comments
-- Mention velocity compared with the ticker's trailing 20-day average
-- Uppercase-character ratio and exclamation-mark density. VADER already accounts for both, but its final score hides their actual magnitude, so the raw ratios are kept as separate features
-- Controls: previous-day volume divided by its 20-day average, subreddit mix, an `earnings_tomorrow` flag, and day of the week
-
-Working hypothesis: mention velocity will be more useful than sentiment, because attention matters more than mood.
-
-Logistic regression is the primary model — it works well on a smaller dataset and its coefficients are interpretable. A gradient-boosting model will be compared against it using feature importance or SHAP values.
-
-## Tools
-
-The main pipeline is classical NLP: regex for ticker matching, TF-IDF and VADER for text features, and logistic regression for prediction. The target comes directly from `yfinance` volume data, so no manual outcome labeling is required.
-
-VADER is a general-purpose lexicon, and its 7,506 entries do not include common trading vocabulary : `bullish`, `bearish`, `bagholding`, `tendies`, `moon`, `puts`, `calls`, and `squeeze` are all absent. To cover that gap, the Claude API will label roughly 500 comments for trading-specific sentiment, and a lighter classifier will be trained on those labels rather than calling the API per comment at inference time.
-
-The two sentiment measures are kept as separate features: VADER for general emotion, the trained classifier for trading sentiment. Estimated labeling cost using Claude Haiku is about $0.10, assuming roughly 50,000 input tokens and 10,000 output tokens.
-
-## Verification
-
-Volume momentum alone could drive the prediction without any Reddit data. A volume-only baseline will be compared against a volume-plus-text model; if the second does not improve on the first, the Reddit features are not adding value.
-
-Earnings are included as a control so that earnings-driven volume is not incorrectly attributed to Reddit activity. The model will also be run without that feature to measure how much of the prediction it carries. If earnings dominate, the feature is likely acting as a proxy — predictive, but not evidence of the relationship under study.
-
-## Status
-
-**Phase 1 : complete.** Proposal submitted, mock schema added, data collection in progress.
-
-## Setup
-
-Runnable collection and modeling scripts will be added under `src/` in a later phase. The planned local setup:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install pandas praw yfinance nltk scikit-learn vaderSentiment anthropic
+```
+notebooks/
+  CDA_PhaseII_AlexToth_LucGrenier.ipynb   # Phase 2 submission: exploration, text mining, Phase 3 plan
+  01b_volume_target.ipynb                 # earlier exploration on 2021 posts (superseded)
+  CDA_Project_PhaseII_Requirements.ipynb  # assignment brief
+data/
+  raw/reddit_wsb.csv                      # Kaggle posts used by 01b only
+  raw/RawDataREADME.txt                   # source notes for that file
+requirements.txt
+LICENSE                                   # MIT (applies to our code, not the datasets)
 ```
 
-Reddit API credentials and the Anthropic API key are stored in a local `.env` file and are not committed. Once the scripts are added, this section will list the exact collection, feature-building, training, and evaluation commands.
+## How to run
+
+1. Python 3.11 or later. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+2. **Optional, for the Claude pilot in Section 3 only:** create a file named `.env` in the project root containing
+   ```
+   ANTHROPIC_API_KEY=your-key-here
+   ```
+   `.env` is gitignored. Never commit a key.
+3. Open `notebooks/CDA_PhaseII_AlexToth_LucGrenier.ipynb` and choose **Restart & Run All**. It needs an internet connection (Hugging Face and Yahoo Finance) and takes a few minutes, mostly loading the comments.
+
+## Phase 2 findings (summary)
+
+- **Attention rises before spikes.** Pre-open mentions before spike sessions run at about 2.3× each ticker's typical level, versus about 1.0× before normal sessions.
+- **VADER sentiment does not.** Mean sentiment and intensity are nearly identical before spike and normal sessions, and VADER's lexicon is missing 18 of 20 common WSB trading terms (including "calls," "puts," "earnings," and "short").
+- **Earnings matter.** "Earnings" appears almost twice as often before spikes, and the tickers that spiked most reported earnings in August, so Phase 3 includes an earnings control.
+
+## Phase 3 plan (summary)
+
+Classification (Path A) with logistic regression and a gradient-boosting comparison, using a small feature set: volume momentum, mention velocity, one sentiment feature, one emotion-intensity feature, and an earnings flag. Claude labels comment-level stance, emotion, intensity, and catalyst, and we compare VADER, Claude polarity, and Claude emotion as features against a volume-only baseline. Evaluation uses time-ordered (expanding-window) validation and a morning watchlist check. Details are in Section 3 of the notebook.
+
+## License
+
+Code is released under the MIT License. The datasets remain subject to their original sources' terms.

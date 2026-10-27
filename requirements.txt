@@ -1,0 +1,10 @@
+pandas>=2.2
+numpy>=1.26
+matplotlib>=3.8
+scikit-learn>=1.4
+yfinance>=0.2.50
+vaderSentiment>=3.3.2
+anthropic>=0.40
+python-dotenv>=1.0
+requests>=2.31
+jupyter

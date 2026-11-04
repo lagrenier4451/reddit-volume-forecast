@@ -1,0 +1,73 @@
+﻿id,ticker,body_reference,differing_fields,human_relevant,relevant,human_stance,stance,human_emotion,emotion,human_intensity,intensity,human_catalyst,catalyst
+ham4eaq,SPY,All in on $435 puts on SPY expiring 8/30 would be a crazy bet 🤔,emotion,true,True,unclear,unclear,uncertainty,none,low,low,none,none
+h8sqj7x,SPY,"SPY is actually quite difficult to trade. It rips for two days and people buy calls, so it goes sideways and maybe down .10%.  Then people buy puts and it rips. Then sideways for six days. Then a slow crawl up.  Then a 1% dump. It’s a hard index to time and get in rhythm with unless you just buy two month out calls and take your 5% gain.",stance,true,True,bullish,unclear,none,none,low,low,none,none
+ha225mn,SPY,SPY is such a beast. why trade any other ticker. just 0-3DTE spy calls,intensity,true,True,bullish,bullish,excitement_fomo,excitement_fomo,low,high,none,none
+h8pe9km,WISH,Why would you ever buy WISH? You ever seen the site? It's all garbage,"relevant, stance",true,False,bearish,unclear,none,none,low,low,none,none
+h8rytlj,WISH,So some mysterious hedge fund in fucking Kazakhstan has a 500% return from pumping and dumping on us…zoom out on the WISH chart (and almost everything else except our lord and savior GME),intensity,true,True,unclear,unclear,anger,anger,low,high,none,none
+h96kgqh,TSLA,Look at TSLA playa....down down down,stance,true,True,unclear,bearish,none,none,low,low,none,none
+h8qdjv7,SOFI,What the fuuuuuck happened to SOFI? Its been slowly green-daying towards my bagholding line until it dropped 11% AH for some reason,emotion,true,True,unclear,unclear,uncertainty,fear_panic,high,high,none,none
+h8qhawz,AMC,"AMC $40 calls will print tmrw. Everyone who panic sold today is about to get rekt. Also be on the lookout for WIX to start trading upwards, when it starts it's going to take off",intensity,true,True,bullish,bullish,excitement_fomo,excitement_fomo,low,high,none,none
+h987dbl,AAPL,why is AAPL volume today almost double the 10 day moving average?  I didn't see any relevant news.,emotion,true,True,unclear,unclear,uncertainty,none,low,low,none,none
+h9frtve,SPY,SPY is unstoppable just remember that and you’ll always make money,intensity,true,True,bullish,bullish,excitement_fomo,excitement_fomo,low,high,none,none
+h88yb7i,SPY,SPY $420 would net me $504k.,"stance, emotion",true,True,unclear,bullish,none,excitement_fomo,low,low,none,none
+haetnfx,AMC,Why because it wasn’t about AMC.. 🙄 post what I want!,"relevant, emotion",true,False,unclear,unclear,anger,none,low,low,none,none
+h9fd513,SPCE,I'm a simple man... who simply wants the SPCE shorts annihilated.,"emotion, catalyst",true,True,bullish,bullish,anger,excitement_fomo,high,high,squeeze,none
+h7tzj70,GME,"This Robinshit has value 1 USD....  
+I wish bankruptcy to Robin for their job in Januaty and February .... GME squeez
+HEDGE FUND BITCHES",stance,true,True,unclear,bullish,anger,anger,high,high,squeeze,squeeze
+h9a9gyk,CLOV,"Low volume on CLOV again, unfortunately I don't think today will be our day
+EDIT. I hope it climbs, I'm waiting patiently just like everyone else, we all need to try to help force the squeeze though","stance, emotion",true,True,unclear,bullish,uncertainty,excitement_fomo,low,low,squeeze,squeeze
+ha6pl4v,GME,My GME price alerts are going off for the first time in ages. Good to be back.,emotion,true,True,unclear,unclear,excitement_fomo,none,low,low,none,none
+h8pm59b,CLOV,Don’t you Wish you bought $clov,"stance, emotion",true,True,bullish,unclear,none,excitement_fomo,low,low,none,none
+h8k567h,SPY,SPY how do you always fuk me. Why don’t you love me!,intensity,true,True,unclear,unclear,anger,anger,low,high,none,none
+h7yr9j1,SPCE,SPCE is fucking your mother while your dad is at work,relevant,true,False,unclear,unclear,none,none,low,low,none,none
+ha7uhpc,CLOV,I’m positive CLOV is the one ticket with the lowest float that can truly jump astronomically. 🍀🚀,catalyst,true,True,bullish,bullish,excitement_fomo,excitement_fomo,high,high,squeeze,none
+ha2t7rn,GME,"GME ruined this sub.  Before it was no option, no care.  Then you had the incels circle jerking each other for holding and downvoting anyone who mentioned options and GME (“SHARES, NOT OPTIONS”).  
+
+Now holding shares is considered a yolo, there’s a crazy cult sub that looks like they could convince themselves of anything (MOASS), and this sub somehow has 5x the size (granted a lot were bots) it had in the beginning of the year and yet seems more dead than ever and not many funny memes too",catalyst,true,True,unclear,unclear,anger,anger,high,high,squeeze,none
+h7uc6ck,AMD,"Just yolo’d 4K into AMD options 
+
+$200 call expiring in December. I’m either going broke or getting rich","emotion, intensity",true,True,bullish,bullish,uncertainty,excitement_fomo,low,high,none,none
+h9bae93,SPY,I stfg if SPY pulls a hulk dick goo goo gaga on this holographic bitch,intensity,true,True,unclear,unclear,none,none,low,high,none,none
+h9bqw4j,SPY,"Up damn it! Do I have to spell it, SPY? UhgstrP, UP!",intensity,true,True,bullish,bullish,anger,anger,low,high,none,none
+h9fuwuu,WISH,💎✋🏻 sold AMC too soon. Just need to wait 4-5 months for a 30k profit. I’ll be holding WISH for awhile.,emotion,true,True,bullish,bullish,none,excitement_fomo,low,low,none,none
+h7kjc4l,NVDA,"Leaps will be fine. Apple, AMD, and NVDA rely on TSM and won’t give their orders to Samsung or Intel due to quality reasons.",stance,true,True,bullish,unclear,none,none,low,low,none,none
+h7pd0y6,SPY,Cmon SPY you dirty slut I wanna see two girls tonight!!!!!!!!,"relevant, emotion, intensity",true,False,unclear,unclear,excitement_fomo,none,high,low,none,none
+haas56w,AMD,Stark differences between AMD and NVDA stonk. GAyMD.,emotion,true,True,unclear,unclear,anger,none,low,low,none,none
+h8v2wfu,CLOV,I’m about to loose 20k if CLOV doesn’t hit $10 in 3 weeks,stance,true,True,unclear,bullish,fear_panic,fear_panic,low,low,none,none
+ha7dk3c,GME,"I set rules for myself on plays I don’t have a price target on. If I see astronomical gains, I take it unless it’s something like GME which could rise past where it is today.
+
+Yesterday I made 190% on 0day Spy calls and cashed out then and there. If I had held through the day I would have made 350%.
+
+Keeping yourself to a strategy that works, and would work looking back at your trades is key. I fuck up a lot not being consistent, like being a SPY bear and then switching my mind on the exact wrong day to buy a call a couple times. Market fucks with our brains. I think someone who can consistently succeed in the market is someone who is just consistent and has a strong mental. Hard to keep that going sometimes. 
+
+Best of luck to you ❤️",stance,true,True,bullish,unclear,none,none,low,low,none,none
+hafgnh9,SPY,Massive straddle on SPY at close. Jackson's Asshole and either rebound or continued dump from whatever the fuck just happened (protip: it wasn't a fucking explosion in Kabul),"stance, emotion, intensity, catalyst",true,True,unclear,neutral,none,uncertainty,low,high,other_news,none
+ha20wci,SPY,"September is usually a good month to have cash on had. But of-course, SPY 0DTE calls.",stance,true,True,bullish,unclear,none,none,low,low,none,none
+h7drsi1,SPY,"""SPY gonna tank all the way to 350"" - some bear back in March
+
+""SPY gonna tank all the way to 400"" - some bear right now
+
+""If I had money I'd totally buy puts because SPY is gonna tank all the way to 450"" - some bear in October",stance,true,True,bullish,unclear,none,none,low,low,none,none
+haxvch6,SPY,SPY goin back 453 today?,emotion,true,True,unclear,unclear,uncertainty,none,low,low,none,none
+h8400ut,TSLA,"For next week- TSLA MVST SOFI NEGG (I know but just look at the 1 week chart and tell Me it isn’t a good set up lol) and VIAC 
+
+Thoughts ?","stance, emotion",true,True,unclear,bullish,uncertainty,none,low,low,none,none
+ha8ml3g,GME,Nah you're just dumb as shit cause you thought GME would crash this time for real and you've been wrong 4x now. Go sit in your corner and STFU 🤡.,stance,true,True,bullish,unclear,anger,anger,high,high,none,none
+h7ggb1g,PLTR,PLTR AUG 13 26.5c’s. Vaporize money instead of buying shit with it.,stance,true,True,bearish,bullish,none,none,low,low,none,none
+ha1st3l,AAPL,"Makes sense. Hopefully AAPL/MSFT takes a dive so it allows your two to run.
+
+SPY at 450 is a bit too frothy to let ALL of MFAGA to run up at the same time.",stance,true,True,unclear,bearish,none,none,low,low,none,none
+h7ua2ed,AMC,"Full on shill here, getting paid twenty didgeridollars for every time I say AMC sucks.  AMC sucks.  GME at least has a plan to reinvent the business, AMC's plan is to give free popcorn to share holders.  
+
+I love AMC, though, because I keep selling call spreads and they keep giving me 90-100% profit depending on if I close them early.",catalyst,true,True,bearish,bearish,none,none,low,low,other_news,none
+hacvolr,GME,I bought GME calls yesterday and I'm down 70% and I have to FEED MY GRANDMOTHER CATFOOD. THANKS WSB.,emotion,true,True,unclear,unclear,anger,fear_panic,high,high,none,none
+h8y2j3n,PLTR,"I'm not saying the Fall of Kabul is going to happen by 8am tomorrow EST to be covered by the Sunday morning talk shows, and I'm definitely not saying that PLTR will close above 26 this week.
+
+Nope, not saying any of that.",catalyst,true,True,bullish,bullish,none,none,low,low,other_news,none
+h7gloh4,PLTR,PLTR is the next TSLA,emotion,true,True,bullish,bullish,excitement_fomo,none,low,low,none,none
+h7dfs83,SPY,No we ran the fuck out. SPY 500,"stance, emotion",true,True,bullish,unclear,excitement_fomo,none,low,low,none,none
+ha1mrtf,NVDA,Closed out my CC's on NVDA for a small loss. Turns out it was the right call. Insane climb so far.,emotion,true,True,unclear,unclear,excitement_fomo,none,low,low,none,none
+ha3voup,SPY,SPY could shoot someone on 5th Avenue and still hit ATH,emotion,true,True,bullish,bullish,excitement_fomo,none,low,low,none,none
+hays431,GME,you got lucky with GME give it a break now!,emotion,true,True,unclear,unclear,none,anger,low,low,none,none
+hagt3he,SPY,"RIP SPY, bulls can take back control after jpow talk tomorrow :p",stance,true,True,bearish,unclear,none,none,low,low,other_news,other_news

@@ -15749,13 +15749,13 @@ top-three watchlist precision.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="5.-Key-Findings-and-Recommendations">5. Key Findings and Recommendations<a class="anchor-link" href="#5.-Key-Findings-and-Recommendations">¶</a></h2><h3 id="Key-Findings">Key Findings<a class="anchor-link" href="#Key-Findings">¶</a></h3><p>These findings use the two metrics fixed in advance in section 4.1, precision@3 and average precision. Threshold-based metrics (F1, recall) are reported as secondary.</p>
 <ul>
-<li><p><strong>Volume alone performs as well as any model on the morning watchlist.</strong> All five logistic models identify 18 spikes across 30 picks, for 60% precision@3. Random selection achieves 15.3%, and the best possible selection 73.3%. Neither Reddit attention nor sentiment improves this metric over volume alone.</p>
+<li><p><strong>Volume alone performs as well as any model on the morning watchlist.</strong> All five logistic models identify 18 spikes across 30 picks, for 60% precision@3. Random selection achieves 15.3%, and the best possible selection 73.3%. Neither Reddit attention nor sentiment improves this metric over volume alone. <em>(Watchlist table, section 4.9.)</em></p>
 </li>
-<li><p><strong>Reddit attention adds a small ranking gain and a larger threshold-based gain.</strong> Adding mention rate and mention velocity raises average precision from 0.741 (M2) to 0.750 (M3). On secondary threshold-based metrics, test F1 rises from 0.562 to 0.635 and recall from 69.2% to 76.9%. Mention velocity has the largest positive coefficient, but attention appears to overlap substantially with recent volume.</p>
+<li><p><strong>Reddit attention adds a small ranking gain and a larger threshold-based gain.</strong> Adding mention rate and mention velocity raises average precision from 0.741 (M2) to 0.750 (M3). On secondary threshold-based metrics, test F1 rises from 0.562 to 0.635 and recall from 69.2% to 76.9%. Mention velocity has the largest positive coefficient, but attention appears to overlap substantially with recent volume. <em>(Results table, section 4.8; coefficient chart, section 4.11.)</em></p>
 </li>
-<li><p><strong>Sentiment features add no value for prediction.</strong> Neither VADER (M4) nor Claude features (M5) improve average precision or precision@3 over M3. Gradient boosting shows a small average-precision increase with Claude features but no improvement in F1 or watchlist precision, and remains below logistic M3.</p>
+<li><p><strong>Sentiment features add no value for prediction.</strong> Neither VADER (M4) nor Claude features (M5) improve average precision or precision@3 over M3. Gradient boosting shows a small average-precision increase with Claude features but no improvement in F1 or watchlist precision, and remains below logistic M3. <em>(Results table, section 4.8; gradient boosting table, section 4.10.)</em></p>
 </li>
-<li><p><strong>Performance is concentrated and uneven.</strong> M3 and M5 detect all large-cap and ETF spikes but only half of retail/meme spikes. CRWD and SPY together account for 14 of each model's 30 watchlist picks.</p>
+<li><p><strong>Performance is concentrated and uneven.</strong> M3 and M5 detect all large-cap and ETF spikes but only half of retail/meme spikes. CRWD and SPY together account for 14 of each model's 30 watchlist picks. <em>(Group table and pick counts, section 4.12.)</em></p>
 </li>
 </ul>
 <h3 id="Business-Implications-and-Recommendations">Business Implications and Recommendations<a class="anchor-link" href="#Business-Implications-and-Recommendations">¶</a></h3><p>For further development of a three-ticker morning watchlist, retain
@@ -15798,6 +15798,7 @@ trading.</p>
 <p>The expanding training windows overlap, and tickers can respond to shared market events. Observations and model comparisons are therefore not independent. No statistical significance claim is made for the reported performance differences.</p>
 <p>Historical comments may also refer directly to volume already observed during the preceding session. Reddit features may partly summarize recent market activity rather than provide an independent signal. The volume-only comparison helps assess incremental predictive value but does not establish causation.</p>
 <h3 id="Ethical-and-Privacy-Considerations">Ethical and Privacy Considerations<a class="anchor-link" href="#Ethical-and-Privacy-Considerations">¶</a></h3><p>The source contains public comments and no author field, but comment text and permalinks may still reveal identities or personal information. Selected comment text and target tickers were sent to an external Claude API. Public availability does not remove privacy considerations.</p>
+<p>Specifically, the SocialGrep data has no author or username field, but it does include a <code>permalink</code> field linking to each comment. We did not use permalinks in the analysis or save them in any output file. Our saved label file (<code>full_phase3_v2.jsonl</code>) stores only comment IDs, tickers, and labels, not comment text. Comment text is saved only for the 12 development comments, the 100 verification comments, and the 47 disagreement cases in <code>labeling_results/</code>.</p>
 <p>Shared files should contain only the text and metadata necessary for reproducibility. Reports and presentations should avoid unnecessarily highlighting identifying details or sensitive disclosures.</p>
 <p>WSB users and the selected tickers do not represent all investors or companies. Slang, sarcasm, and differences in discussion volume may produce uneven labeling and prediction quality. The ticker-group checks describe these differences but do not constitute a comprehensive fairness assessment.</p>
 <p>False positives could waste users’ attention or encourage unnecessary trades, while false negatives could cause unusual activity to be missed. A predicted volume spike does not indicate whether a price will rise or fall. Any future use should support human investigation and clearly communicate these limits.</p>
@@ -15816,7 +15817,9 @@ trading.</p>
 <tr>
 <th>Task</th>
 <th>Tool</th>
-<th>How AI was used</th>
+<th>Prompt</th>
+<th>Output</th>
+<th>Decision</th>
 <th>Verification</th>
 </tr>
 </thead>
@@ -15824,32 +15827,50 @@ trading.</p>
 <tr>
 <td>Comment labelling</td>
 <td>Claude Haiku 5.5 (Anthropic API, Batch API)</td>
-<td>Labelled relevance, stance, emotion, intensity, and catalyst for 53,954 comment–ticker pairs using prompt <code>phase3_v2</code> (12 development, 100 verification, 53,842 batch).</td>
-<td>Alex hand-labelled 100 separate pairs without AI assistance before viewing Claude's output: agreement 78–96%, Cohen's κ 0.64–0.74 on stance, emotion, intensity, and catalyst. <strong>Claude errors found:</strong> it rated emphatic but routine comments as high intensity, marked some WISH stock comments as irrelevant, and labelled "SPY $420 would net me $504k" as bullish without stated direction. All 47 disagreement cases were reviewed and saved to <code>verification_disagreements.csv</code>.</td>
+<td>System prompt <code>phase3_v2</code> (section 3.2): label relevance, stance, emotion, intensity, and catalyst for one comment–ticker pair and return JSON only.</td>
+<td>Labels for 53,954 comment–ticker pairs (12 development, 100 verification, 53,842 batch).</td>
+<td>Kept for exploratory features (M5) and qualitative analysis. Earnings controlled with the calendar instead of Claude's catalyst label.</td>
+<td>Alex hand-labelled 100 random pairs without AI assistance before viewing Claude's output: agreement 78–96%, Cohen's κ 0.64–0.74 on stance, emotion, intensity, and catalyst. <strong>Claude errors found:</strong> it rated emphatic but routine comments as high intensity, marked some WISH stock comments as irrelevant, and labelled "SPY $420 would net me $504k" as bullish without stated direction. All 47 disagreement cases were reviewed and saved to <code>verification_disagreements.csv</code>.</td>
 </tr>
 <tr>
 <td>Malformed API responses</td>
 <td>Claude Haiku 5.5 (Batch API)</td>
-<td>Returned JSON labels for each batch request.</td>
-<td><strong>26 of 53,842 responses were invalid:</strong> 12 hit the token limit, 13 added text after the JSON, and 1 added an extra field. Schema validation rejected all 26 before saving; each was relabelled successfully on retry.</td>
+<td>Same <code>phase3_v2</code> prompt.</td>
+<td><strong>26 of 53,842 responses were invalid:</strong> 12 hit the token limit, 13 added text after the JSON, and 1 added an extra field.</td>
+<td>Rejected invalid responses rather than repairing them; relabelled each on retry.</td>
+<td>Schema validation caught all 26 before saving; every retry passed validation.</td>
 </tr>
 <tr>
 <td>Prompt revision</td>
 <td>Claude Haiku 5.5</td>
-<td>Development pilot with prompt v1 on 12 comments.</td>
-<td><strong>v1 inferred current stance from past trades</strong> (e.g. losses on closed positions). Caught on manual review of the pilot; v2 added rules that closed positions, quoted views, and hedges do not establish current stance.</td>
+<td>Prompt v1 on 12 development comments.</td>
+<td><strong>v1 inferred current stance from past trades</strong> (e.g. losses on closed positions).</td>
+<td>Revised to v2: closed positions, quoted views, and hedges do not establish current stance. Prompt then frozen.</td>
+<td>Caught on manual review of the pilot; v2 rerun on the same 12 comments before full labelling.</td>
 </tr>
 <tr>
 <td>Code help: data pipeline</td>
 <td>Claude (assistant)</td>
-<td>Help writing the volume-target, session-alignment, and batch-labelling code.</td>
+<td>Requests for help writing the volume-target, session-alignment, and batch-labelling code.</td>
+<td>Draft code for the 20-day baseline, <code>merge_asof</code> session assignment, and Batch API submission and parsing.</td>
+<td>Used after fixing the errors in the next column.</td>
 <td><strong>Suggested <code>merge_asof</code> failed</strong> because comment and market-open timestamps used different precisions; fixed by converting both to microseconds. <strong>Suggested API call used an unsupported <code>temperature</code> setting</strong>, and the first response parser read the model's thinking block instead of its answer; both caught by errors and fixed. The 20-day baseline was verified by hand on GME (Aug 3), and the session rule was tested on known cases (Friday 2 p.m. → Monday).</td>
 </tr>
 <tr>
 <td>Earnings dates</td>
 <td>Claude (assistant)</td>
-<td>Suggested checking earnings dates against company sources.</td>
+<td>Asked how to get and check 2021 earnings report dates for the modelling tickers.</td>
+<td>Suggested checking dates against company sources; also gave SoFi's date from recollection as Aug 10.</td>
+<td>Used the yfinance earnings dates, checked against company sources, not the assistant's dates.</td>
 <td><strong>The assistant's recollection of SoFi's report date (Aug 10) was wrong.</strong> Checked against SoFi's press release and SEC filing: Aug 12, 2021, after the close, matching the yfinance data.</td>
+</tr>
+<tr>
+<td>Writing and presentation</td>
+<td>Claude (assistant)</td>
+<td>Requests to edit report text, draft the README, and build the presentation slides and script.</td>
+<td>Edited prose, a README draft, a slide deck, and a speaker script.</td>
+<td>Edited and approved by the team; all analysis choices are our own.</td>
+<td>Every number in the README and slides was checked against notebook outputs. <strong>A slide quoted a paraphrase of a comment</strong> and was corrected to the exact text, and a meme-stock count was corrected from 6 of 12 to 4 of 12 on the watchlist.</td>
 </tr>
 </tbody>
 </table>

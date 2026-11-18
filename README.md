@@ -27,7 +27,7 @@ All models were evaluated the way they would be used: trained on earlier session
 - **Yesterday's volume does most of the work.** It alone gets 60% of watchlist picks right, against a 73% ceiling.
 - **Reddit attention adds a little.** Average precision rises from 0.741 to 0.750, with no gain on the watchlist. (F1 at a 0.5 threshold, a secondary measure, rises from 0.56 to 0.64.)
 - **Sentiment adds nothing.** Neither VADER nor Claude labels improved results.
-- **The watchlist is concentrated.** CRWD and SPY take 14 of 30 picks; the models catch all large-cap spikes but only 6 of 12 meme-stock spikes.
+- **The watchlist is concentrated.** CRWD and SPY take 14 of 30 picks; every large-cap and ETF spike made the watchlist, but only 4 of 12 meme-stock spikes did (6 of 12 at the 0.5 threshold).
 
 Full analysis, key findings, business implications, limitations and the AI usage log are in the Phase III notebook.
 
@@ -56,7 +56,7 @@ Claude Haiku 5.5 labelled about 54,000 comment–ticker pairs, mostly through th
 3. **No API key or spending is needed to reproduce the results.** All Claude labels load from `notebooks/labeling_results/`, and `ALLOW_API_CALLS = False` blocks any new paid calls.
 4. Only to make new Claude calls: put `ANTHROPIC_API_KEY=your-key` in a `.env` file in the `notebooks/` folder and set `ALLOW_API_CALLS = True`. `.env` is gitignored; never commit a key.
 
-HTML exports of the notebooks are in `notebooks/` for reading without running anything.
+An HTML export of the Phase III notebook is in `notebooks/` for reading without running anything.
 
 ## Repository structure
 
@@ -65,6 +65,7 @@ notebooks/
   CDA_PhaseIII_AlexToth_LucGrenier.ipynb   # final report (Phase III)
   CDA_PhaseIII_AlexToth_LucGrenier.html    # HTML export
   CDA_PhaseII_AlexToth_LucGrenier.ipynb    # Phase II exploration
+  CDA_Project_PhaseII_Requirements.ipynb   # Phase II requirements notebook
   labeling_results/                        # saved Claude labels, verification sheet, batch IDs
   01b_volume_target.ipynb                  # earlier exploration on 2021 Kaggle posts (superseded)
 data/raw/                                  # Kaggle posts used only by 01b
